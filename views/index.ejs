@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title> Weather Search </title>
+		<meta charset="utf-8" />
+		<!-- Latest compiled and minified CSS -->
+		<link
+			rel="stylesheet"
+			href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+			integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm"
+			crossorigin="anonymous"
+		/>
+		<!-- include the JS file for this HTML working with express -->
+		<script type="text/javascript" src="static/script.js"></script> 
+	</head>
+	<body>
+		<div class="container">
+			<%- include('search'); %>
+            <% if(weatherList.data.found){%>
+            <hr />
+			<div class="card card-body my-4">
+				<h2 id="city"><%= weatherList.city.name %></h2>
+				<% if(!weatherList.data.database){ %>
+				<h5>Period</h5>
+				<p>Started at: <%= weatherList.list[0].dt_txt %></p>
+				<p>Ended at: <%= weatherList.list[weatherList.list.length - 1].dt_txt %></p>
+				<button type="submit" onClick="fetchToDB()" class="btn btn-success col-md-2">
+					Save forecast
+				</button>
+				<% }else{ %>
+				<h5>Updated at: <%= weatherList.updated_at %></h5>
+				<% }; %>
+			</div>
+			<table class="table table-bordered">
+				<thead style="color:DodgerBlue">
+					<tr>
+						<th scope="col">Datetime</th>
+						<th scope="col">Min temp</th>
+						<th scope="col">Max temp</th>
+						<th scope="col">Wind speed</th>
+					</tr>
+				</thead>
+				<tbody>
+					<% if(!weatherList.data.database){ for(var key in (weatherList.list)){ %>
+					<tr className="weatherTable">
+						<td><span><%= weatherList.list[key].dt_txt %></span></td>
+						<td><span><%= weatherList.list[key].main.temp_min %></span>°C</td>
+						<td><span><%= weatherList.list[key].main.temp_max %></span>°C</td>
+						<td><span><%= weatherList.list[key].wind.speed %></span>km/h</td>
+					</tr>
+                    <% }} else { %>
+                        <td><span><%= weatherList.t_date_time %></span></td>
+						<td><span><%= weatherList.t_temp_min %></span>°C</td>
+						<td><span><%= weatherList.t_temp_max %></span>°C</td>
+						<td><span><%= weatherList.w_wind %></span>km/h</td>
+                    </tr>
+                    <% }; %>
+				</tbody>
+			</table>
+			<% }; %>
+		</div>
+
+	</body>
+</html>

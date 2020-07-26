@@ -1,0 +1,20 @@
+<div class="container">
+    <h1 class="text-center m-4"><strong style="color:FireBrick">Jacket</strong> or no <strong style="color:FireBrick">Jacket</strong></h1>
+    <form method="GET">
+        <div class="row">
+            <input
+                type="text"
+                name="city"
+                class="form-control col-md-6 m-3"
+                placeholder="Enter city name here (E.g New York)"
+                required
+            />
+            <button type="submit" formaction="/searchAPI" class="btn btn-primary col-md-2 m-3">
+                Get from API
+            </button>
+            <button type="submit" formaction="/searchDB" class="btn btn-warning col-md-2 my-3">
+                Get from DB
+            </button>
+        </div>
+    </form>
+</div>
