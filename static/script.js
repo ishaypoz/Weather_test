@@ -11,5 +11,5 @@ function fetchToDB() {
 			date_time: document.getElementsByTagName('span')[0].textContent,
 			wind: document.getElementsByTagName('span')[3].textContent
 		})
-	}).then((res) => console.log('Weather Modified in Database'));
+	}).then(function(res){res.json()});
 }
